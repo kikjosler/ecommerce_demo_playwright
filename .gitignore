@@ -2,8 +2,10 @@
 venv/
 __pycache__/
 *.pyc
-.pytest_cache/
-reports/
 .env
 .DS_Store
 .idea
+reports/
+*.html
+*.log
+.pytest_cache/

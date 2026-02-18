@@ -1,27 +1,19 @@
 from pages.base_page import BasePage
-from playwright.sync_api import expect
-
+from playwright.sync_api import Page, expect
 
 class InventoryPage(BasePage):
-    """Каталог товаров"""
-
-    def __init__(self, page):
+    def __init__(self, page: Page):
         super().__init__(page)
-        self.add_to_cart_buttons = page.locator(".btn_inventory")
-        self.shopping_cart_link = page.locator("[data-test='shopping-cart-anonymous']")
-        self.product_titles = page.locator(".inventory_item_name")
-
-    def add_all_to_cart(self):
-        """Добавить все товары в корзину"""
-        self.add_to_cart_buttons.nth(0).click()
-        self.add_to_cart_buttons.nth(1).click()
-
+    
+    def add_first_item_to_cart(self):
+        """Добавить первый товар"""
+        self.page.locator(".btn.btn_primary.btn_small.btn_inventory").first.click()
+        self.page.locator(".shopping_cart_badge").wait_for(state="visible")
+        print("✅ Первый товар в корзине!")
+    
     def go_to_cart(self):
         """Перейти в корзину"""
-        self.shopping_cart_link.click()
+        self.page.locator(".shopping_cart_link").click()
+        self.page.wait_for_load_state("networkidle")
         from pages.cart_page import CartPage
         return CartPage(self.page)
-
-    def get_product_count(self) -> int:
-        """Количество товаров на странице"""
-        return len(self.product_titles.all())

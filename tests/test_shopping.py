@@ -1,12 +1,20 @@
-def test_complete_shopping_flow(logged_user):
-    """Полный шоппинг-флоу: товары → корзина → оформление"""
-    # Добавляем товары
-    logged_user.add_all_to_cart()
-    cart_page = logged_user.go_to_cart()
+import pytest
+from pages.login_page import LoginPage
+from pages.inventory_page import InventoryPage
 
-    # Проверяем корзину
-    assert cart_page.is_loaded()
-
-    # Checkout (упрощенно)
-    checkout_page = cart_page.proceed_to_checkout()
-    assert checkout_page.is_loaded()
+@pytest.mark.smoke
+def test_add_multiple_items(page):
+    """🛒 Добавить 2+ товара в корзину"""
+    # Логин
+    login_page = LoginPage(page)
+    login_page.navigate()
+    login_page.login("standard_user", "secret_sauce")
+    
+    # Добавить 2 товара
+    inventory = InventoryPage(page)
+    inventory.add_first_item_to_cart()
+    inventory.page.locator(".btn.btn_primary.btn_small.btn_inventory").nth(1).click()
+    
+    # Проверка бейджа = 2
+    assert inventory.page.locator(".shopping_cart_badge").inner_text() == "2"
+    print("✅ 2 товара в корзине!")

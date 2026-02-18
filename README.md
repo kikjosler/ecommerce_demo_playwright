@@ -6,10 +6,10 @@
 [![Python](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 
 ## **Что тестируем**
-Автоматизированные End-to-End тесты интернет-магазина:
+E2E тесты интернет-магазина:
 
-| Тест | Сценарий | Время |
-|------|----------|-------|
+| Тест | Сценарий
+|------|----------
 | 🔐 `test_successful_login` | Успешный вход standard_user
 | 🚫 `test_locked_out_user` | Блокировка locked_out_user
 | 🛒 `test_add_multiple_items` | Добавление 3+ товаров в корзину
@@ -26,5 +26,5 @@ cd ecommerce_demo_playwright
 pip install -r requirements.txt
 playwright install chromium
 
-# Запуск всех тестов (медленно + видимый браузер)
+# Запуск всех тестов (медленно + браузер)
 pytest tests/ -v -s

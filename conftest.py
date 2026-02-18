@@ -5,12 +5,11 @@ from playwright.sync_api import sync_playwright
 @pytest.fixture(scope="session")
 def browser(playwright):
     """CI = headless=True, Локально = headless=False"""
-    # GitHub Actions = CI=true → headless=True
     is_ci = os.getenv('CI', 'false').lower() == 'true'
     
     browser = playwright.chromium.launch(
-        headless=is_ci,
-        slow_mo=0 if is_ci else 1500
+        headless=is_ci,                    # CI=true → headless
+        slow_mo=0 if is_ci else 1500       # CI → быстро, локально → медленно
     )
     yield browser
     browser.close()
@@ -25,4 +24,4 @@ def context(browser):
 def page(context):
     page = context.new_page()
     yield page
-    page.close()
+    page.context.close()

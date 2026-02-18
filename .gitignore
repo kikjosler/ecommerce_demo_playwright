@@ -9,3 +9,5 @@ reports/
 *.html
 *.log
 .pytest_cache/
+allure-results/
+allure-report/

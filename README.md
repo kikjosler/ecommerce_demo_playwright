@@ -1,7 +1,6 @@
 # E-Commerce UI Tests (Playwright + pytest + GitHub Actions)
 
 [![CI Tests](https://github.com/YOUR_USERNAME/ecommerce_demo_playwright/actions/workflows/test.yml/badge.svg)](https://github.com/YOUR_USERNAME/ecommerce_demo_playwright/actions)
-[![Tests](https://img.shields.io/badge/tests-4/4%20PASSED-brightgreen.svg)](https://github.com/YOUR_USERNAME/ecommerce_demo_playwright/actions)
 [![Playwright](https://img.shields.io/badge/playwright-latest-brightgreen.svg)](https://playwright.dev/python/docs/intro)
 [![Python](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 

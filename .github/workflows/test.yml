@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-  workflow_dispatch:  # ← Ручной запуск!
+  workflow_dispatch:  # Ручной запуск!
 
 jobs:
   test:
@@ -22,7 +22,7 @@ jobs:
         pip install -r requirements.txt
         playwright install --with-deps chromium
 
-    - name: Run tests (HTML + Allure)
+    - name: Run tests (HTML + Allure RAW)
       run: |
         mkdir -p reports allure-results
         pytest tests/ \
@@ -33,29 +33,16 @@ jobs:
       env:
         PLAYWRIGHT_HEADLESS: "true"
 
-    - name: Generate Allure report
-      if: always()
-      run: |
-        mkdir -p allure-report
-        allure generate allure-results -o allure-report --clean
-
     - name: Upload HTML report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: pytest-html-report
-        path: reports/report.html
-
-    - name: Upload Allure report
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report
-        path: allure-report/
-
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-report
         path: reports/
+
+    - name: Upload Allure RAW results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: allure-results-raw
+        path: allure-results/

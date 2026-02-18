@@ -1,12 +1,18 @@
-name: ecommerce_demo_playwright
-on: [push, pull_request]
+name: E2E Tests + Reports
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:  # ← Ручной запуск!
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Python
+    - name: Set up Python 3.13
       uses: actions/setup-python@v5
       with:
         python-version: '3.13'
@@ -14,23 +20,42 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        playwright install --with-deps
+        playwright install --with-deps chromium
 
-    - name: Run tests
-      run: pytest tests/ --alluredir=allure-results -v -s
+    - name: Run tests (HTML + Allure)
+      run: |
+        mkdir -p reports allure-results
+        pytest tests/ \
+          --html=reports/report.html \
+          --self-contained-html \
+          --alluredir=allure-results \
+          -v -s -n auto
       env:
         PLAYWRIGHT_HEADLESS: "true"
-    - name: Upload report
+
+    - name: Generate Allure report
+      if: always()
+      run: |
+        mkdir -p allure-report
+        allure generate allure-results -o allure-report --clean
+
+    - name: Upload HTML report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report
-        path: reports/
+        name: pytest-html-report
+        path: reports/report.html
 
-    - name: 📊 Generate Allure report
-      run: allure generate allure-results -o allure-report --clean
-
-    - name: 📈 Upload Allure report
+    - name: Upload Allure report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: allure-report/
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report
+        path: reports/

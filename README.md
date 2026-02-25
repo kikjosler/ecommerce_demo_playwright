@@ -18,7 +18,7 @@
 
 ## **Как запустить**
 
-### **Локально (браузер)**
+### **Локально**
 ```bash
 git clone https://github.com/YOUR_USERNAME/ecommerce_demo_playwright.git
 cd ecommerce_demo_playwright

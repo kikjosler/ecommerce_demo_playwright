@@ -5,14 +5,16 @@
 [![Python](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 
 ## **Что тестируем**
-E2E тесты интернет-магазина:
+## **Е2Е тесты маркетплейса**
 
-| Тест | Сценарий
-|------|----------
-| 🔐 `test_successful_login` | Успешный вход standard_user
-| 🚫 `test_locked_out_user` | Блокировка locked_out_user
-| 🛒 `test_add_multiple_items` | Добавление 3+ товаров в корзину
-| 💳 `test_full_checkout_flow` | Полный чекаут с оплатой
+| Тест | Сценарий | Время |
+|------|----------|-------|
+| 🔐 `successful_login` | Корректный логин | ~8s |
+| 🚫 `locked_out_user` | Блокировка юзера | ~6s |
+| 🛒 `add_multiple_items` | 3 товара в корзину | ~12s |
+| 💳 `full_checkout_flow` | Полный чекаут | ~20s |
+| ✅ `checkout_validation` | **ВАЛИДАЦИЯ формы** | ~10s |
+
 
 ## **Как запустить**
 

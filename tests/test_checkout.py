@@ -1,20 +1,35 @@
 import pytest
-from pages.login_page import LoginPage
-from pages.inventory_page import InventoryPage
-from pages.cart_page import CartPage
+
 
 @pytest.mark.smoke
 def test_full_checkout_flow(page):
-    # Логин
-    login_page = LoginPage(page)
-    login_page.navigate()
-    login_page.login("standard_user", "secret_sauce")
+    """Полный чекаут: логин → товар → корзина → оплата → успех"""
 
-    # Добавить ПЕРВЫЙ товар
-    inventory = InventoryPage(page)
-    inventory.add_first_item_to_cart()
+    # 1. Логин
+    page.goto("https://www.saucedemo.com/")
+    page.fill("#user-name", "standard_user")
+    page.fill("#password", "secret_sauce")
+    page.click("#login-button")
 
-    # Перейти в корзину
-    cart_page = inventory.go_to_cart()
-    print("✅ До корзины дошли!")
+    # 2. Добавить товар
+    page.click("[data-test='add-to-cart-sauce-labs-backpack']")
 
+    # 3. Корзина
+    page.click(".shopping_cart_link")
+    print("✅ Корзина: 1 товар")
+
+    # 4. Checkout
+    page.click("[data-test='checkout']")
+
+    # 5. Заполнить форму
+    page.fill("[data-test='firstName']", "John")
+    page.fill("[data-test='lastName']", "Doe")
+    page.fill("[data-test='postalCode']", "12345")
+    page.click("[data-test='continue']")
+
+    # 6. Завершить
+    page.click("[data-test='finish']")
+
+    # 7. Проверка успеха
+    assert page.locator("[data-test='complete-header']").is_visible()
+    print("✅ Чекаут завершен!")

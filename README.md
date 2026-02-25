@@ -13,7 +13,7 @@
 | 🚫 `locked_out_user` | Блокировка юзера | ~6s |
 | 🛒 `add_multiple_items` | 3 товара в корзину | ~12s |
 | 💳 `full_checkout_flow` | Полный чекаут | ~20s |
-| ✅ `checkout_validation` | **ВАЛИДАЦИЯ формы** | ~10s |
+| ✅ `checkout_validation` | Валидация формы | ~10s |
 
 
 ## **Как запустить**

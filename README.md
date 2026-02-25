@@ -27,5 +27,5 @@ cd ecommerce_demo_playwright
 pip install -r requirements.txt
 playwright install chromium
 
-# Запуск всех тестов (медленно + браузер)
+# Запуск всех тестов
 pytest tests/ -v -s

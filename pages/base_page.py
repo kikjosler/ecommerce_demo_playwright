@@ -1,4 +1,4 @@
-from playwright.sync_api import Page  # ← ТОЛЬКО ЭТО!
+from playwright.sync_api import Page
 
 
 class BasePage:

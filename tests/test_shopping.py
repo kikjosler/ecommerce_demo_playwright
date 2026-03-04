@@ -4,7 +4,7 @@ from pages.inventory_page import InventoryPage
 
 @pytest.mark.smoke
 def test_add_multiple_items(page):
-    """🛒 Добавить 2+ товара в корзину"""
+    """Добавить 2+ товара в корзину"""
     # Логин
     login_page = LoginPage(page)
     login_page.navigate()
@@ -17,4 +17,4 @@ def test_add_multiple_items(page):
     
     # Проверка бейджа = 2
     assert inventory.page.locator(".shopping_cart_badge").inner_text() == "2"
-    print("✅ 2 товара в корзине!")
+    print("2 товара в корзине!")

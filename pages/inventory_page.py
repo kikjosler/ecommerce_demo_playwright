@@ -9,7 +9,7 @@ class InventoryPage(BasePage):
         """Добавить первый товар"""
         self.page.locator(".btn.btn_primary.btn_small.btn_inventory").first.click()
         self.page.locator(".shopping_cart_badge").wait_for(state="visible")
-        print("✅ Первый товар в корзине!")
+        print("Первый товар в корзине!")
     
     def go_to_cart(self):
         """Перейти в корзину"""

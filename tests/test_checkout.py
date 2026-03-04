@@ -16,7 +16,7 @@ def test_full_checkout_flow(page):
 
     # 3. Корзина
     page.click(".shopping_cart_link")
-    print("✅ Корзина: 1 товар")
+    print("Корзина: 1 товар")
 
     # 4. Checkout
     page.click("[data-test='checkout']")
@@ -32,4 +32,4 @@ def test_full_checkout_flow(page):
 
     # 7. Проверка успеха
     assert page.locator("[data-test='complete-header']").is_visible()
-    print("✅ Чекаут завершен!")
+    print("Чекаут завершен!")

@@ -1,12 +1,12 @@
 from playwright.sync_api import Page, expect
 
 class CheckoutPage:
-    """💳 Page Object для Checkout (оформление заказа)"""
+    """Page Object для Checkout (оформление заказа)"""
     
     def __init__(self, page: Page):
         self.page = page
         
-        # 🏷️ Локаторы формы Checkout
+        # Локаторы формы Checkout
         self.first_name = page.locator("[data-test='firstName']")
         self.last_name = page.locator("[data-test='lastName']")
         self.zip_code = page.locator("[data-test='postalCode']")

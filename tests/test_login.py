@@ -2,7 +2,7 @@ from pages.login_page import LoginPage
 import pytest
 
 @pytest.mark.smoke
-def test_successful_login(page):  # ← ФУНКЦИЯ, не метод класса!
+def test_successful_login(page):
     login_page = LoginPage(page)
     login_page.navigate()
     login_page.login("standard_user", "secret_sauce")

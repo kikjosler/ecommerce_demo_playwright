@@ -8,10 +8,10 @@ def browser(playwright):
     mode = os.getenv('DEMO_MODE', 'local').lower()
     
     if mode == 'demo':
-        # СОБЕС: видимый + медленно
+        # видимый + медленно
         browser = playwright.chromium.launch(headless=False, slow_mo=1500)
     elif os.getenv('CI', 'false').lower() == 'true':
-        # CI: headless + быстро
+        # headless + быстро
         browser = playwright.chromium.launch(headless=True, slow_mo=0)
     else:
         # Локально: гибрид
